@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:DotNetUriPart.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DotNetUriPart.Views.ToolView"
+             x:DataType="vm:MainViewModel">
+
+  <Grid RowDefinitions="Auto,*">
+    <Grid.Styles>
+      <Style Selector="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+      </Style>
+    </Grid.Styles>
+    <!-- URL入力エリア -->
+    <Grid Grid.Row="0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Margin="4">
+      <TextBlock Grid.Row="0" Grid.Column="0" Text="URI:"  />
+      <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputText.Value}" />
+      <TextBlock Grid.Row="1" Grid.Column="1"
+                 Text="{Binding InputState.Value.Error, FallbackValue=ErrorText}"
+                 IsVisible="{Binding InputState.Value.Error, Converter={x:Static ObjectConverters.IsNotNull}}"
+                 Margin="4" Foreground="Red" />
+    </Grid>
+    <!-- URL部分情報エリア -->
+    <DataGrid Grid.Row="1" ItemsSource="{Binding UriParts.Value}" Margin="4">
+      <DataGrid.Columns>
+        <!-- 対象メンバ列 -->
+        <DataGridTemplateColumn Header="Member">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal">
+                <Button Content="📋" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        ToolTip.Tip="Copy"
+                        Command="{Binding $parent[UserControl].DataContext.CopyCodeCommand}"
+                        CommandParameter="{Binding}" />
+                <TextBlock Margin="6,0,12,0" Text="{Binding Member, Mode=OneWay}" />
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <!-- URL部分列 -->
+        <DataGridTemplateColumn Header="Value" Width="*">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal">
+                <Button Content="📋" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        ToolTip.Tip="Copy"
+                        IsEnabled="{Binding Valid}"
+                        Command="{Binding $parent[DataGrid].DataContext.CopyPartCommand}"
+                        CommandParameter="{Binding}"/>
+                <TextBlock Margin="6,0,12,0" Text="{Binding Value, Mode=OneWay}" />
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+  </Grid>
+
+</UserControl>
