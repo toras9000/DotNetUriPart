@@ -1,6 +1,12 @@
 <Project>
+
   <PropertyGroup>
     <Nullable>enable</Nullable>
-    <AvaloniaVersion>11.0.2</AvaloniaVersion>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>toras9000</Authors>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
 </Project>
