@@ -9,4 +9,14 @@
     <Version>0.1.0</Version>
   </PropertyGroup>
 
+  <Target Name="DeleteUnnecessaryFiles" AfterTargets="Publish">
+    <ItemGroup>
+      <UnnecessaryFiles Include="$(PublishDir)*.pdb"/>
+    </ItemGroup>
+    <Delete Files="@(UnnecessaryFiles)">
+      <Output TaskParameter="DeletedFiles" ItemName="FilesDeleted"/>
+    </Delete>
+    <Message Text="Deleted unnecessary files: @(FilesDeleted)" Importance="high" />
+  </Target>
+
 </Project>

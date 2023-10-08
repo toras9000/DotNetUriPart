@@ -7,20 +7,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetUriPart.Desktop", "Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetUriPart", "DotNetUriPart\DotNetUriPart.csproj", "{059481AD-7908-46BD-94EE-AF24D7E44D9D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{E0F70627-7646-418B-94D2-A3A0AC0FA7B0}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6276013D-7055-472E-930B-3573A87C53F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6276013D-7055-472E-930B-3573A87C53F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6276013D-7055-472E-930B-3573A87C53F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6276013D-7055-472E-930B-3573A87C53F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{059481AD-7908-46BD-94EE-AF24D7E44D9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
