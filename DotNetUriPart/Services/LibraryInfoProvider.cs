@@ -47,7 +47,7 @@ public class LibraryInfoProvider : ILibraryInfoProvider
             new("ReactiveProperty",       getVer<ReactiveCommand>(),    @"https://github.com/runceel/ReactiveProperty",  getLicense("MIT License", "ReactiveProperty.txt")),
             new("System.Reactive",        getVer<ObserverBase<int>>(),  @"https://github.com/dotnet/reactive",           getLicense("MIT License", "System.Reactive.txt")),
             new("MicroCom",               getVer<MicroComProxyBase>(),  @"https://github.com/kekekeks/MicroCom",         getLicense("MIT License", "MicroCom.txt")),
-            new("SkiaSharp",              "2.88.3",                     @"https://github.com/mono/SkiaSharp",            getLicense("MIT License", "SkiaSharp.txt")),
+            new("SkiaSharp",              "2.88.6",                     @"https://github.com/mono/SkiaSharp",            getLicense("MIT License", "SkiaSharp.txt")),
             new("HarfBuzzSharp",          "2.8.2.3",                    @"https://github.com/mono/SkiaSharp",            getLicense("MIT License", "SkiaSharp.txt")),   // SkiaSharpと同じ。
             new("Tmds.DBus.Protocol",     "0.15.0",                     @"https://github.com/tmds/Tmds.DBus",            getLicense("MIT License", "Tmds.DBus.Protocol.txt")),
             new("ANGLE",                  "2.1.0.2023020321",           @"https://github.com/AvaloniaUI/angle",          getLicense("ANGLE License", "ANGLE.txt")),
