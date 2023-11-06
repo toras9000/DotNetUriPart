@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MicroCom.Runtime;
+using Microsoft.Extensions.Logging;
 using Reactive.Bindings;
 
 namespace DotNetUriPart.Services;
@@ -36,6 +37,12 @@ public interface ILibraryInfoProvider
 /// </summary>
 public class LibraryInfoProvider : ILibraryInfoProvider
 {
+    /// <summary>依存サービスを受け取るコンストラクタ</summary>
+    public LibraryInfoProvider(ILogger<LibraryInfoProvider> logger)
+    {
+        this.logger = logger;
+    }
+
     /// <inheritdoc />
     public LibraryInfo[] GetLibraryInfos()
     {
@@ -53,6 +60,9 @@ public class LibraryInfoProvider : ILibraryInfoProvider
             new("ANGLE",                  "2.1.0.2023020321",           @"https://github.com/AvaloniaUI/angle",          getLicense("ANGLE License", "ANGLE.txt")),
         });
     }
+
+    /// <summary></summary>
+    private ILogger<LibraryInfoProvider> logger;
 
     /// <summary>ライブラリ情報のキャッシュ</summary>
     private LibraryInfo[]? infoCache;
@@ -75,7 +85,10 @@ public class LibraryInfoProvider : ILibraryInfoProvider
             using var reader = new StreamReader(stream);
             text = reader.ReadToEnd();
         }
-        catch { }
+        catch (Exception ex)
+        {
+            this.logger.LogWarning(ex, $"Failed to load resource '{res}'");
+        }
 
         return new(kind, text);
     }

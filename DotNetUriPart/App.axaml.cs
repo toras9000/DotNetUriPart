@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
@@ -6,7 +7,9 @@ using CommunityToolkit.Mvvm.DependencyInjection;
 using DotNetUriPart.Services;
 using DotNetUriPart.ViewModels;
 using DotNetUriPart.Views;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetUriPart;
 
@@ -36,8 +39,19 @@ public partial class App : Application
     {
         base.RegisterServices();
 
+        // 構成ファイル
+        var config = new ConfigurationBuilder()
+            .SetBasePath(System.IO.Path.GetDirectoryName(Environment.ProcessPath)!)
+            .AddJsonFile("appsettings.json", optional: true)
+            .Build();
+
         // 型の登録
         var services = new ServiceCollection();
+
+        services.AddLogging(builder => builder
+            .AddDebug()
+            .AddConfiguration(config.GetSection("Logging"))
+        );
 
         services.AddTransient<IAppConstantsProvider, AppConstantsProvider>();
         services.AddTransient<ILibraryInfoProvider, LibraryInfoProvider>();
