@@ -27,9 +27,4 @@
     <AvaloniaResource Include="Assets\Licenses\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Views\AboutView.axaml.cs">
-      <DependentUpon>AboutView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>
