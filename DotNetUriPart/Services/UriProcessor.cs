@@ -6,7 +6,8 @@ namespace DotNetUriPart.Services;
 /// <param name="Member">部分情報取得メンバ</param>
 /// <param name="Value">部分情報</param>
 /// <param name="Valid">部分情報取得可能か否か</param>
-public record UriPart(string Member, string Value, bool Valid);
+/// <param name="Code">コピーするコード</param>
+public record UriPart(string Member, string Value, bool Valid, string Code);
 
 /// <summary>
 /// URIの分解処理
@@ -30,15 +31,16 @@ public class UriProcessor : IUriProcessor
         if (uri == null) return null;
 
         // 部分情報の切り出しを試みる
-        static UriPart getUriPart(Uri uri, string caption, Func<Uri, string> getter)
+        static UriPart getUriPart(Uri uri, string caption, Func<Uri, string> getter, string? code = null)
         {
+            var codeText = $"uri.{code ?? caption}";
             try
             {
-                return new(caption, getter(uri), true);
+                return new(caption, getter(uri), true, codeText);
             }
             catch (Exception ex)
             {
-                return new(caption, $"Error:{ex.GetType().Name}", false);
+                return new(caption, $"Error:{ex.GetType().Name}", false, codeText);
             }
         }
 
@@ -65,10 +67,10 @@ public class UriProcessor : IUriProcessor
             getUriPart(uri, nameof(Uri.PathAndQuery),   uri => uri.PathAndQuery),
             getUriPart(uri, nameof(Uri.Query),          uri => uri.Query),
             getUriPart(uri, nameof(Uri.Fragment),       uri => uri.Fragment),
-            getUriPart(uri, "GetLeftPart(Scheme)",      uri => uri.GetLeftPart(UriPartial.Scheme)),
-            getUriPart(uri, "GetLeftPart(Authority)",   uri => uri.GetLeftPart(UriPartial.Authority)),
-            getUriPart(uri, "GetLeftPart(Path)",        uri => uri.GetLeftPart(UriPartial.Path)),
-            getUriPart(uri, "GetLeftPart(Query)",       uri => uri.GetLeftPart(UriPartial.Query)),
+            getUriPart(uri, "GetLeftPart(Scheme)",      uri => uri.GetLeftPart(UriPartial.Scheme),    "GetLeftPart(UriPartial.Scheme)"),
+            getUriPart(uri, "GetLeftPart(Authority)",   uri => uri.GetLeftPart(UriPartial.Authority), "GetLeftPart(UriPartial.Authority)"),
+            getUriPart(uri, "GetLeftPart(Path)",        uri => uri.GetLeftPart(UriPartial.Path),      "GetLeftPart(UriPartial.Path)"),
+            getUriPart(uri, "GetLeftPart(Query)",       uri => uri.GetLeftPart(UriPartial.Query),     "GetLeftPart(UriPartial.Query)"),
         };
     }
 

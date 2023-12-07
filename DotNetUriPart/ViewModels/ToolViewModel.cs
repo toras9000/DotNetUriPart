@@ -42,7 +42,7 @@ public partial class ToolViewModel : ViewModelBase
 
         // URI部分取得コードのコピーコマンド
         this.CopyCodeCommand = new AsyncReactiveCommand<UriPart?>()
-            .WithSubscribe(i => clipboard.SetTextAsync($"uri.{i?.Member}"), o => o.AddTo(this.Resources))
+            .WithSubscribe(i => clipboard.SetTextAsync(i?.Code), o => o.AddTo(this.Resources))
             .AddTo(this.Resources);
 
         // URI部分文字列コピーコマンド
